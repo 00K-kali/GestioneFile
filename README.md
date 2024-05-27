@@ -1,61 +1,100 @@
-Overview
-This tool synchronizes two folders: a source folder and a destination folder. The synchronization process runs periodically, based on a user-defined delay. The tool monitors file modifications and creations within a specified time range, updating the destination folder accordingly.
+# Folder Sync Program
 
-Objectives
-Synchronize two folders: a source and a destination.
-Periodically update the destination folder based on a user-defined delay.
-Check file modification and creation dates, and update the destination folder if they fall within the specified time range.
-Features
-Synchronization Mode: Users can choose to either update the destination folder or just display the changes in a list.
-Control Buttons: "Start" and "Stop" buttons manage the synchronization process.
-Folder Selection: Users can select source and destination paths from a pre-saved list, which can be updated via the program interface.
-Non-blocking Wait: The delay is broken into 5-second intervals, allowing the user to stop the cycle without waiting for the total delay.
-File Tracking: The program detects if a file has been modified or created within the time range.
-Logging: All operations are logged in a .csv file, viewable with Excel. If the log file does not exist, it is created with column headers.
-Initial Sync: The first synchronization copies all files from the source to the destination, regardless of the delay filter.
-Renamed File Handling: The program handles renamed files by comparing file names between the source and destination folders and removing files from the destination if they don't exist in the source.
-Local Database: A text file acts as a database for the list of files in the destination folder, reducing the load if the destination is not local.
-Known Issues and Resolutions
-Renamed Files: Previously, the program did not detect renamed files. This has been resolved by deleting the old file in the destination and copying the renamed file from the source.
-ProgressBar Functionality: Initially, the ProgressBar did not update correctly. This has been fixed to increment every 5 seconds and reset after each cycle.
-Restarting on "Start" Button Press: The program used to restart the synchronization cycle if "Start" was pressed while already running. This has been resolved by checking the "run" variable to detect if synchronization is currently active.
-Future Improvements
-Cloud Integration: Add the ability to sync files with cloud services (OneDrive, Google Drive, Dropbox). Incorporate API for authentication and file operations.
-Enhanced Interface: Incorporate a login page for cloud services within the app, supporting various authentication methods (Two-Factor, Authenticator App).
-Database-based Sync: Implement a local database system for storing the list of files in the destination folder to minimize server load.
-User Interface Enhancements: Set an initial window size and minimum dimensions for better readability.
-Settings Page: Add a settings page to configure paths, delay, copy function, delete function, and initial full sync option.
-Usage
-Main Screen
-Start/Stop: Control synchronization with "Start" and "Stop" buttons.
-Settings: Access the settings screen via the gear icon.
-Settings Screen
-Source Path: Select from pre-saved paths or add new ones.
-Destination Path: Enable/disable and select from pre-saved paths or add new ones.
-Delay: Set synchronization delay (days, hours, minutes, seconds).
-Additional Options: Enable/disable full initial sync and other settings.
-Save: Save settings and return to the main screen.
-Synchronization in Progress
-The program loads settings and begins the synchronization process.
-On first run, copies all files from the source to the destination if enabled.
-Subsequent synchronizations only copy files modified or created within the delay period.
-The ProgressBar updates every 5 seconds.
-The synchronization continues indefinitely until stopped by the user.
-Technical Details
-.NET MAUI Framework
-The program uses .NET MAUI for cross-platform development, ensuring consistent functionality across different operating systems with adaptive UI layouts.
-Main Components
-MainPage: Initial screen with control buttons.
-SettingsPage: Screen for configuring paths and delay.
-LogPage: View the log of operations.
-Data Models: Classes for handling file data and log entries.
-Sync Class: Core functionality for synchronization logic and file operations.
-Key Functions
-UpdatePathsPicker: Loads paths into pickers.
-UpdatePaths: Adds new paths and updates pickers.
-LoadSettings: Loads current settings into the interface.
-SyncCopia_DestPaths: Syncs the state of copy-related controls.
-Start: Initiates the synchronization cycle.
-Filter: Filters files based on modification and creation dates.
-FileList: Generates a list of files in a directory and its subdirectories.
-This tool ensures efficient and flexible folder synchronization, with robust handling of file changes and user-friendly controls for a seamless experience.
+## Objectives
+
+- Synchronize two folders, one source and one destination.
+- Update the destination folder periodically after a user-defined delay.
+- Check the modification and creation dates of files to update the destination folder if they fall within the specified time range.
+
+## Features
+
+- Option to display changes in a list without actually updating the destination folder.
+- "Start" and "Stop" buttons to control the running state.
+- Source and destination paths selectable from a list saved in a .txt file, updatable via the interface.
+- Non-blocking wait for the interface, divided into 5-second segments.
+- Detection of files modified or created within the specified time range.
+- Logging operations in a .csv file viewable with Excel.
+- Automatic creation of the log file with column headers on the first run.
+- Synchronization of files regardless of creation date if manually inserted.
+- Management of renamed files by comparing file names in source and destination folders.
+- Use of a text file as a database to avoid read overload on the destination folder.
+
+## Known Issues and Solutions
+
+- **Detecting Renamed Files**: The program now deletes the file from the destination folder and recopies it from the source folder.
+- **Non-Functioning ProgressBar**: Fixed, now updates correctly after each partial wait.
+- **Restarting the Cycle on "Start" Button Press During Execution**: Fixed, checks the "run" variable status before starting a new cycle.
+
+## Possible Improvements
+
+- Upload files to cloud services (e.g., OneDrive, Google Drive, Dropbox).
+- Integration of a cloud service login page.
+- Implementation of a local database-based system to reduce server workload on cloud services.
+- Initial and minimum window sizes to ensure interface readability.
+- Addition of a settings page to configure settings before starting.
+
+## Operation
+
+The program is developed using the .NET MAUI framework to support cross-platform programming with unified C# code. Due to screen size differences across operating systems, platform-specific XAML files have been created while the C# code remains identical.
+
+### Main Screen
+
+In the main interface, you can:
+
+- Manage the system synchronization status using the "Start" and "Stop" buttons.
+- Access the settings screen by clicking on the gear icon.
+
+### Settings Screen
+
+Allows you to:
+
+- Set a source path.
+- Enable or disable copying to the destination folder.
+- Set a destination path.
+- Enable or disable copying all files on the first sync.
+- Set the delay for synchronization.
+
+### Running Main Screen
+
+When you click the "Start" button:
+
+- The program loads settings and starts synchronization.
+- On the first run, all files are copied from the source to the destination folder.
+- From the second synchronization onwards, only files modified or created within the specified time range are copied.
+
+### Log Screen
+
+Allows you to view the log of operations performed by the program.
+
+## Code Structure
+
+### Main Classes
+
+- **MainPage**: Main page class, contains functions for user interaction.
+- **Settings**: Settings screen class.
+- **Log**: Class for managing the log view window.
+- **ViewLog**: Class for detailed viewing of a selected log.
+- **FileData**: Class containing details of new files found in the source folder.
+- **LogData**: Class for creating templates for each row of the log page.
+- **Settings**: Class containing system synchronization settings.
+- **Sync**: Class containing attributes and methods for folder synchronization.
+
+### Synchronization
+
+The **Sync** class manages the synchronization cycle:
+
+- **Start()**: Main function that starts the synchronization cycle.
+- **Filter()**: Recursive function that filters files based on creation and modification dates.
+- **FileList()**: Function to create a list of files in the folders.
+
+## Execution
+
+1. **Program Start**: Configure initial settings via the settings screen.
+2. **Synchronization**: Press "Start" to begin the synchronization cycle.
+3. **Log Viewing**: Use the log screen to view operations performed.
+
+---
+
+We hope this documentation is helpful. For further questions or contributions, please feel free to contact us.
+
+Happy syncing!
