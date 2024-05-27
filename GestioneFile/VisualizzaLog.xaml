@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GestioneFile.VisualizzaLog"
+             Title="VisualizzaLog">
+    <Grid
+        Margin="10,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            Text="Percorso file"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            x:Name="LBL_File"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            Text="Data creazione"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="LBL_Creazione"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            Text="Data ultima modifica"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="LBL_Modifica"/>
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            Text="Evento"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            x:Name="LBL_Evento"/>
+
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            Text="Data evento"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="1"
+            x:Name="LBL_DataEvento"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GestioneFile.MainAndroid"
+             Title="Gestione File">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="10,0,0,20"
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    Aspect="Fill"
+                    x:Name="BUT_LogFile"
+                    Clicked="BUT_LogFile_Clicked"/>
+
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,10,20"
+                    HorizontalOptions="End"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    Aspect="Fill"
+                    x:Name="BUT_Settings"
+                    Clicked="BUT_Settings_Clicked"/>
+
+                <Button 
+                    Grid.Row="1"
+                    Margin="0, 0, 10, 20"
+                    BackgroundColor="LimeGreen"
+                    BorderColor="Yellow"
+                    x:Name="BUT_Avvia"
+                    Text="Avvia" 
+                    Clicked="BUT_Avvia_Clicked"/>
+
+                <Button 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="10, 0, 0, 20"
+                    BackgroundColor="Red"
+                    BorderColor="Yellow"
+                    TextColor="Black"
+                    BorderWidth="3"
+                    x:Name="BUT_Stop"
+                    Text="Stop" 
+                    Clicked="BUT_Stop_Clicked"/>
+
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Margin="10, 0, 0, 0"
+                    x:Name="LBL_NumeroFile"
+                    Text="Numero file: " />
+
+                <ProgressBar
+                    Grid.Row="2"
+                    HeightRequest="20"
+                    Grid.ColumnSpan="4"
+                    ProgressColor="Green"
+                    x:Name="PGB_Timer"/>
+
+                <ListView 
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    MinimumHeightRequest="300"
+                    MaximumHeightRequest="630"
+                    MinimumWidthRequest="515"
+                    x:Name="LST_Output"
+                    Margin="20, 20, 10, 20"
+                    BackgroundColor="Transparent"
+                    SeparatorColor="Black"
+                    SeparatorVisibility="Default"
+                    VerticalScrollBarVisibility="Always"
+                    ItemTapped="LST_Output_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell
+                                Text ="{Binding nome}"
+                                Detail="{Binding data_completo}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
